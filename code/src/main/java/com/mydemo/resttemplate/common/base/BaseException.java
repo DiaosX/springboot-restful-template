@@ -63,10 +63,6 @@ public class BaseException extends RuntimeException {
         this.errMsg = errMsg;
     }
 
-    public String getMessage() {
-        return errMsg;
-    }
-
     @Override
     public Throwable fillInStackTrace() {
         return this;

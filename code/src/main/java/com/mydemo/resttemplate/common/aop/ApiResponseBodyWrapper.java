@@ -31,7 +31,7 @@ public class ApiResponseBodyWrapper implements ResponseBodyAdvice<Object> {
             return false;
         }
         //只对自己关心的api经行包装逻辑，其他任何的api应该忽略
-        if (BaseController.class.isAssignableFrom(returnClazz)) {
+        if (BaseController.class.isAssignableFrom(method.getDeclaringClass())) {
             //已经是统一返回包装类，无需再包装
             if (BaseResp.class == returnClazz || BaseResp.class.isAssignableFrom(returnClazz)) {
                 return false;
