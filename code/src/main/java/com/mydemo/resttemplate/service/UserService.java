@@ -27,5 +27,5 @@ public interface UserService {
 
     Integer maxUserId();
 
-    BasePagedResult<User> search(SearchUserByConditionRequest request);
+    BasePagedResult search(SearchUserByConditionRequest request);
 }

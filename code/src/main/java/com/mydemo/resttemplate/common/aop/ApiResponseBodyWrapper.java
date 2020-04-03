@@ -3,7 +3,6 @@ package com.mydemo.resttemplate.common.aop;
 
 import com.alibaba.fastjson.JSON;
 import com.mydemo.resttemplate.common.annotation.IgnoreResultWrapper;
-import com.mydemo.resttemplate.common.base.BasePagedResp;
 import com.mydemo.resttemplate.common.base.BaseResp;
 import com.mydemo.resttemplate.controller.BaseController;
 import org.springframework.core.MethodParameter;
@@ -34,9 +33,6 @@ public class ApiResponseBodyWrapper implements ResponseBodyAdvice<Object> {
         if (BaseController.class.isAssignableFrom(method.getDeclaringClass())) {
             //已经是统一返回包装类，无需再包装
             if (BaseResp.class == returnClazz || BaseResp.class.isAssignableFrom(returnClazz)) {
-                return false;
-            }
-            if (BasePagedResp.class == returnClazz || BasePagedResp.class.isAssignableFrom(returnClazz)) {
                 return false;
             }
             if (method.isAnnotationPresent(IgnoreResultWrapper.class)) {

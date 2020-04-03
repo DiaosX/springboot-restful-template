@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public BasePagedResult<User> search(SearchUserByConditionRequest request) {
+    public BasePagedResult search(SearchUserByConditionRequest request) {
         List<User> list = new ArrayList<>();
         List<User> filteredList = new ArrayList<>();
         Predicate<User> predicate = x -> true;
@@ -133,11 +133,6 @@ public class UserServiceImpl implements UserService {
             int skipCount = request.getPageSize() * (request.getPageIndex() - 1);
             filteredList.addAll(list.stream().skip(skipCount).limit(request.getPageSize()).collect(Collectors.toList()));
         }
-        BasePagedResult<User> resp = new BasePagedResult<>();
-        resp.setItems(filteredList);
-        resp.setPageIndex(request.getPageIndex());
-        resp.setPageSize(request.getPageSize());
-        resp.setTotalCount(list.size());
-        return resp;
+        return BasePagedResult.set(request.getPageIndex(), request.getPageSize(), list.size(), filteredList);
     }
 }

@@ -12,4 +12,13 @@ public class BasePagedResult<T> {
     private Integer pageSize;
     private Integer totalCount;
     private List<T> items;
+
+    public static <T> BasePagedResult set(Integer pageIndex, Integer pageSize, Integer totalCount, List<T> items) {
+        BasePagedResult<T> result = new BasePagedResult<>();
+        result.setItems(items);
+        result.setPageIndex(pageIndex);
+        result.setPageSize(pageSize);
+        result.setTotalCount(totalCount);
+        return result;
+    }
 }

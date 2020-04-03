@@ -19,18 +19,18 @@ public class HelloWorldController extends BaseController {
         return bucket;
     }
 
-    @RequestMapping("forString")
+    @RequestMapping(value = "forString", method = RequestMethod.GET)
     public String forString() {
         String message = "Hello world";
         return message;
     }
 
-    @RequestMapping("forException")
+    @RequestMapping(value = "forException", method = RequestMethod.GET)
     public String forException() {
         throw new RuntimeException("发生异常了.");
     }
 
-    @RequestMapping("forObject")
+    @RequestMapping(value = "forObject", method = RequestMethod.GET)
     public Object forObject() {
         String obj = "cccc";
         return obj;

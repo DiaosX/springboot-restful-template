@@ -1,6 +1,5 @@
 package com.mydemo.resttemplate.controller;
 
-import com.mydemo.resttemplate.common.base.BasePagedResp;
 import com.mydemo.resttemplate.common.base.BasePagedResult;
 import com.mydemo.resttemplate.common.base.BaseResp;
 import com.mydemo.resttemplate.model.entity.User;
@@ -93,8 +92,7 @@ public class UserController extends BaseController {
 
     @ApiOperation("检索用户")
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public BasePagedResp<User> search(@RequestBody SearchUserByConditionRequest request) {
-        BasePagedResult<User> users = userService.search(request);
-        return BasePagedResp.success(users);
+    public BaseResp search(@RequestBody SearchUserByConditionRequest request) {
+        return BaseResp.success(userService.search(request));
     }
 }
