@@ -1,6 +1,6 @@
 package com.mydemo.resttemplate.common.base;
 
-public enum BaseEnum implements IBaseEnum {
+public enum BaseEnum implements BaseError {
     // 数据操作错误定义
     SUCCESS("200", "成功!"),
     BODY_NOT_MATCH("400", "请求的数据格式不符!"),

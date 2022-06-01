@@ -8,10 +8,10 @@ import java.util.List;
 @Getter
 @Setter
 public class BasePagedResult<T> {
-    private Integer pageIndex;
-    private Integer pageSize;
-    private Integer totalCount;
-    private List<T> items;
+    protected Integer pageIndex;
+    protected Integer pageSize;
+    protected Integer totalCount;
+    protected List<T> items;
 
     public static <T> BasePagedResult set(Integer pageIndex, Integer pageSize, Integer totalCount, List<T> items) {
         BasePagedResult<T> result = new BasePagedResult<>();

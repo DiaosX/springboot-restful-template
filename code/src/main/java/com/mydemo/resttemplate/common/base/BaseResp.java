@@ -7,16 +7,16 @@ import lombok.Setter;
 @Setter
 @Getter
 public class BaseResp<T> {
-    private boolean success;
-    private String code;
-    private String msg;
-    private T data;
+    protected boolean success;
+    protected String code;
+    protected String msg;
+    protected T data;
 
     public BaseResp() {
 
     }
 
-    public BaseResp(IBaseEnum error) {
+    public BaseResp(BaseError error) {
         this(error.getCode(), error.getMsg());
     }
 
@@ -54,7 +54,7 @@ public class BaseResp<T> {
     /**
      * 失败
      */
-    public static BaseResp error(IBaseEnum error) {
+    public static BaseResp error(BaseError error) {
         return new BaseResp(error);
     }
 

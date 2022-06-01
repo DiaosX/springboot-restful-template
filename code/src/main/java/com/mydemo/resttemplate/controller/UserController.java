@@ -1,6 +1,5 @@
 package com.mydemo.resttemplate.controller;
 
-import com.mydemo.resttemplate.common.base.BasePagedResult;
 import com.mydemo.resttemplate.common.base.BaseResp;
 import com.mydemo.resttemplate.model.entity.User;
 import com.mydemo.resttemplate.model.request.AddUserRequest;
@@ -10,9 +9,9 @@ import com.mydemo.resttemplate.model.vo.UserVO;
 import com.mydemo.resttemplate.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +19,7 @@ import java.util.List;
 @Api(value = "用户管理", tags = {"用户管理"})
 public class UserController extends BaseController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -28,7 +27,7 @@ public class UserController extends BaseController {
 
     @ApiOperation("增加用户")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public BaseResp<User> addUser(@Validated @RequestBody AddUserRequest request) {
+    public BaseResp<User> addUser(@Valid @RequestBody AddUserRequest request) {
         UserVO userVO = request.convertTo();
         User newUser = userService.addUser(userVO);
         return BaseResp.success(newUser);
@@ -43,21 +42,21 @@ public class UserController extends BaseController {
 
     @ApiOperation("根据用户名查询用户")
     @RequestMapping(value = "/queryByName", method = RequestMethod.POST)
-    public BaseResp<List<User>> queryUserByName(@RequestBody QueryUserByNameRequest request) {
+    public BaseResp<List<User>> queryUserByName(@Valid @RequestBody QueryUserByNameRequest request) {
         List<User> allUser = userService.queryByName(request.getUserName());
         return BaseResp.success(allUser);
     }
 
     @ApiOperation("增加用户时存在异常")
     @RequestMapping(value = "/addWithExistException", method = RequestMethod.POST)
-    public BaseResp<User> addWithExistException(@RequestBody AddUserRequest request) {
+    public BaseResp<User> addWithExistException(@Valid @RequestBody AddUserRequest request) {
         User user = userService.addWithExistException(request.convertTo());
         return BaseResp.success(user);
     }
 
     @ApiOperation("增加用户时存在异常")
     @RequestMapping(value = "/addWithNameNotBlankException", method = RequestMethod.POST)
-    public BaseResp<User> addWithNameNotBlankException(@RequestBody AddUserRequest request) {
+    public BaseResp<User> addWithNameNotBlankException(@Valid @RequestBody AddUserRequest request) {
         User user = userService.addWithNameNotBlankException(request.convertTo());
         return BaseResp.success(user);
     }
@@ -92,7 +91,7 @@ public class UserController extends BaseController {
 
     @ApiOperation("检索用户")
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public BaseResp search(@RequestBody SearchUserByConditionRequest request) {
+    public BaseResp search(@Valid @RequestBody SearchUserByConditionRequest request) {
         return BaseResp.success(userService.search(request));
     }
 }

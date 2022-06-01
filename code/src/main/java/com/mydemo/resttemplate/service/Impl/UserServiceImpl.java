@@ -1,20 +1,25 @@
 package com.mydemo.resttemplate.service.Impl;
 
-import com.mydemo.resttemplate.common.enums.user.UserErrorEnum;
 import com.mydemo.resttemplate.common.base.BaseException;
 import com.mydemo.resttemplate.common.base.BasePagedResult;
+import com.mydemo.resttemplate.common.enums.ErrorCodeEnum_User;
 import com.mydemo.resttemplate.model.entity.User;
 import com.mydemo.resttemplate.model.request.SearchUserByConditionRequest;
 import com.mydemo.resttemplate.model.vo.UserVO;
 import com.mydemo.resttemplate.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
     private static Map<Integer, User> USER_STORE = new HashMap<>();
@@ -43,10 +48,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User addUser(UserVO userVO) {
         if (userVO.getId() == null) {
-            throw new BaseException(UserErrorEnum.USER_ID_NOT_NULL);
+            throw new BaseException(ErrorCodeEnum_User.USER_ID_NOT_NULL);
         }
         if (USER_STORE.containsKey(userVO.getId())) {
-            throw new BaseException(UserErrorEnum.USER_EXIST);
+            throw new BaseException(ErrorCodeEnum_User.USER_EXIST);
         }
         User user = new User();
         user.setId(userVO.getId());
@@ -76,7 +81,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> queryByName(String name) {
         if (StringUtils.isBlank(name)) {
-            throw new BaseException(UserErrorEnum.USER_NAME_NOT_EMPTY_OR_NULL);
+            throw new BaseException(ErrorCodeEnum_User.USER_NAME_NOT_EMPTY_OR_NULL);
         }
         List<User> userList = new ArrayList<>();
         for (User user : USER_STORE.values()) {
@@ -89,29 +94,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addWithExistException(UserVO user) {
-
-        throw new BaseException(UserErrorEnum.USER_EXIST);
+        throw ErrorCodeEnum_User.USER_EXIST.asError();
     }
 
     @Override
     public User addWithNameNotBlankException(UserVO user) {
-        throw new BaseException(UserErrorEnum.USER_NAME_NOT_EMPTY_OR_NULL);
+        throw ErrorCodeEnum_User.USER_NAME_NOT_EMPTY_OR_NULL.asError();
     }
 
     @Override
     public void deleteById(Integer id) {
         if (id == null) {
-            throw new BaseException(UserErrorEnum.USER_NAME_NOT_EMPTY_OR_NULL);
+            throw ErrorCodeEnum_User.USER_NAME_NOT_EMPTY_OR_NULL.asError();
         }
         if (!USER_STORE.containsKey(id)) {
-            throw new BaseException(UserErrorEnum.USER_NOT_EXIST);
+            throw ErrorCodeEnum_User.USER_NOT_EXIST.asError();
         }
         USER_STORE.remove(id);
     }
 
     @Override
     public void deleteWithNotExistException(Integer id) {
-        throw new BaseException(UserErrorEnum.USER_NOT_EXIST);
+        throw ErrorCodeEnum_User.USER_NOT_EXIST.asError();
     }
 
     @Override

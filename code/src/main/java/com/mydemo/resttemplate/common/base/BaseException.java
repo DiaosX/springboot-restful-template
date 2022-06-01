@@ -17,13 +17,13 @@ public class BaseException extends RuntimeException {
         super();
     }
 
-    public BaseException(IBaseEnum error) {
+    public BaseException(BaseError error) {
         super(error.getCode());
         this.errCode = error.getCode();
         this.errMsg = error.getMsg();
     }
 
-    public BaseException(IBaseEnum error, Throwable cause) {
+    public BaseException(BaseError error, Throwable cause) {
         super(error.getCode(), cause);
         this.errCode = error.getCode();
         this.errMsg = error.getMsg();
