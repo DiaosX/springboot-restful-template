@@ -22,6 +22,8 @@
         <lombok.version>1.16.10</lombok.version>
         <hutool.version>5.8.0.M4</hutool.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <mybatis-plus.version>3.3.0</mybatis-plus.version>
+        <mysql.version>5.1.47</mysql.version>
     </properties>
 
     <dependencies>
@@ -37,11 +39,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.1</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
@@ -94,7 +92,17 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <version>${mysql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -106,14 +114,14 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.ehcache</groupId>-->
-<!--            <artifactId>ehcache</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-cache</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.ehcache</groupId>-->
+        <!--            <artifactId>ehcache</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-cache</artifactId>-->
+        <!--        </dependency>-->
 
         <!-- hutool -->
         <dependency>
@@ -133,6 +141,16 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
     </dependencies>

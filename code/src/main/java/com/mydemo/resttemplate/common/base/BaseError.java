@@ -1,7 +1,11 @@
 package com.mydemo.resttemplate.common.base;
 
+
 /**
- * 基础错误接口
+ * @Author yst
+ * @Date 2021/10/27 10:11 上午
+ * @Version 1.0
+ * @Desc 基础错误接口
  */
 public interface BaseError {
 

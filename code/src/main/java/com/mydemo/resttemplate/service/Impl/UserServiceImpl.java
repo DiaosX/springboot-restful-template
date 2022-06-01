@@ -137,6 +137,6 @@ public class UserServiceImpl implements UserService {
             int skipCount = request.getPageSize() * (request.getPageIndex() - 1);
             filteredList.addAll(list.stream().skip(skipCount).limit(request.getPageSize()).collect(Collectors.toList()));
         }
-        return BasePagedResult.set(request.getPageIndex(), request.getPageSize(), list.size(), filteredList);
+        return BasePagedResult.toResult(request.getPageIndex(), request.getPageSize(), list.size(), filteredList);
     }
 }

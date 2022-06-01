@@ -1,5 +1,6 @@
 package com.mydemo.resttemplate.model.request;
 
+import com.mydemo.resttemplate.common.base.BaseReq;
 import com.mydemo.resttemplate.model.vo.UserVO;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,10 +9,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Setter
 @Getter
-public class AddUserRequest {
+public class AddUserRequest extends BaseReq implements Serializable {
     @NotNull(message = "用户ID不能为空")
     private Integer id;
     @NotNull(message = "用户名称不能为空")

@@ -1,5 +1,10 @@
 package com.mydemo.resttemplate.common.base;
 
+/**
+ * @Author yst
+ * @Date 2021/10/27 10:11 上午
+ * @Version 1.0
+ */
 public enum BaseEnum implements BaseError {
     // 数据操作错误定义
     SUCCESS("200", "成功!"),
