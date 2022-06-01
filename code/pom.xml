@@ -23,7 +23,7 @@
         <hutool.version>5.8.0.M4</hutool.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mybatis-plus.version>3.3.0</mybatis-plus.version>
-        <mysql.version>5.1.47</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
     </properties>
 
     <dependencies>
