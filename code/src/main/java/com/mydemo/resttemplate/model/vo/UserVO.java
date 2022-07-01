@@ -6,7 +6,7 @@ import lombok.ToString;
 @Data
 @ToString
 public class UserVO {
-    private Integer id;
+    private Long id;
     private String name;
     private Integer age;
     private String address;

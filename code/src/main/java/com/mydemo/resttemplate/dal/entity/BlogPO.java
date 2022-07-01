@@ -1,10 +1,11 @@
-package com.mydemo.resttemplate.model.entity;
+package com.mydemo.resttemplate.dal.entity;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mydemo.resttemplate.common.base.BaseEntity;
 
 import java.io.Serializable;
 
-public class Blog extends BaseEntity implements Serializable {
+public class BlogPO extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 2L;
 
 
@@ -27,7 +28,7 @@ public class Blog extends BaseEntity implements Serializable {
      */
     private int age;
 
-    public Blog() {
+    public BlogPO() {
     }
 
     public String getName() {

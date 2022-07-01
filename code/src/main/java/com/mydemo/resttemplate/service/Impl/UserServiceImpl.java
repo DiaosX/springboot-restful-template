@@ -3,7 +3,7 @@ package com.mydemo.resttemplate.service.Impl;
 import com.mydemo.resttemplate.common.base.BaseException;
 import com.mydemo.resttemplate.common.base.BasePagedResult;
 import com.mydemo.resttemplate.common.enums.ErrorCodeEnum_User;
-import com.mydemo.resttemplate.model.entity.User;
+import com.mydemo.resttemplate.dal.entity.UserPO;
 import com.mydemo.resttemplate.model.request.SearchUserByConditionRequest;
 import com.mydemo.resttemplate.model.vo.UserVO;
 import com.mydemo.resttemplate.service.UserService;
@@ -22,21 +22,21 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
-    private static Map<Integer, User> USER_STORE = new HashMap<>();
+    private static Map<Long, UserPO> USER_STORE = new HashMap<>();
 
     @PostConstruct
     public void initStore() {
 
-        User user1 = new User();
-        user1.setId(1);
+        UserPO user1 = new UserPO();
+        user1.setId(1L);
         user1.setAge(10);
         user1.setName("user1");
         user1.setAddress("user1_address");
         user1.setEmail("11@11.com");
         USER_STORE.put(user1.getId(), user1);
 
-        User user2 = new User();
-        user2.setId(2);
+        UserPO user2 = new UserPO();
+        user2.setId(2L);
         user2.setAge(11);
         user2.setName("user2");
         user2.setAddress("user2_address");
@@ -46,14 +46,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User addUser(UserVO userVO) {
+    public UserPO addUser(UserVO userVO) {
         if (userVO.getId() == null) {
             throw new BaseException(ErrorCodeEnum_User.USER_ID_NOT_NULL);
         }
         if (USER_STORE.containsKey(userVO.getId())) {
             throw new BaseException(ErrorCodeEnum_User.USER_EXIST);
         }
-        User user = new User();
+        UserPO user = new UserPO();
         user.setId(userVO.getId());
         user.setAge(userVO.getAge());
         user.setName(userVO.getName());
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> queryAll() {
+    public List<UserPO> queryAll() {
         return new ArrayList<>(USER_STORE.values());
     }
 
@@ -74,17 +74,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer maxUserId() {
+    public Long maxUserId() {
         return new ArrayList<>(USER_STORE.keySet()).get(0);
     }
 
     @Override
-    public List<User> queryByName(String name) {
+    public List<UserPO> queryByName(String name) {
         if (StringUtils.isBlank(name)) {
             throw new BaseException(ErrorCodeEnum_User.USER_NAME_NOT_EMPTY_OR_NULL);
         }
-        List<User> userList = new ArrayList<>();
-        for (User user : USER_STORE.values()) {
+        List<UserPO> userList = new ArrayList<>();
+        for (UserPO user : USER_STORE.values()) {
             if (user.getName().equalsIgnoreCase(name)) {
                 userList.add(user);
             }
@@ -93,12 +93,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User addWithExistException(UserVO user) {
+    public UserPO addWithExistException(UserVO user) {
         throw ErrorCodeEnum_User.USER_EXIST.asError();
     }
 
     @Override
-    public User addWithNameNotBlankException(UserVO user) {
+    public UserPO addWithNameNotBlankException(UserVO user) {
         throw ErrorCodeEnum_User.USER_NAME_NOT_EMPTY_OR_NULL.asError();
     }
 
@@ -120,9 +120,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public BasePagedResult search(SearchUserByConditionRequest request) {
-        List<User> list = new ArrayList<>();
-        List<User> filteredList = new ArrayList<>();
-        Predicate<User> predicate = x -> true;
+        List<UserPO> list = new ArrayList<>();
+        List<UserPO> filteredList = new ArrayList<>();
+        Predicate<UserPO> predicate = x -> true;
         if (StringUtils.isNotBlank(request.getName())) {
             predicate = predicate.and(u -> u.getName().contains(request.getName()));
         }

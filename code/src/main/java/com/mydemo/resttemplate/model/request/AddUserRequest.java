@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Getter
 public class AddUserRequest extends BaseReq implements Serializable {
     @NotNull(message = "用户ID不能为空")
-    private Integer id;
+    private Long id;
     @NotNull(message = "用户名称不能为空")
     private String name;
     @Min(1)

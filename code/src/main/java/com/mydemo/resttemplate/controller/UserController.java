@@ -1,7 +1,7 @@
 package com.mydemo.resttemplate.controller;
 
 import com.mydemo.resttemplate.common.base.BaseResp;
-import com.mydemo.resttemplate.model.entity.User;
+import com.mydemo.resttemplate.dal.entity.UserPO;
 import com.mydemo.resttemplate.model.request.AddUserRequest;
 import com.mydemo.resttemplate.model.request.QueryUserByNameRequest;
 import com.mydemo.resttemplate.model.request.SearchUserByConditionRequest;
@@ -27,37 +27,37 @@ public class UserController extends BaseController {
 
     @ApiOperation("增加用户")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public BaseResp<User> addUser(@Valid @RequestBody AddUserRequest request) {
+    public BaseResp<UserPO> addUser(@Valid @RequestBody AddUserRequest request) {
         UserVO userVO = request.convertTo();
-        User newUser = userService.addUser(userVO);
+        UserPO newUser = userService.addUser(userVO);
         return BaseResp.success(newUser);
     }
 
     @ApiOperation("查询所有用户")
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    public BaseResp<List<User>> allUser() {
-        List<User> allUser = userService.queryAll();
+    public BaseResp<List<UserPO>> allUser() {
+        List<UserPO> allUser = userService.queryAll();
         return BaseResp.success(allUser);
     }
 
     @ApiOperation("根据用户名查询用户")
     @RequestMapping(value = "/queryByName", method = RequestMethod.POST)
-    public BaseResp<List<User>> queryUserByName(@Valid @RequestBody QueryUserByNameRequest request) {
-        List<User> allUser = userService.queryByName(request.getUserName());
+    public BaseResp<List<UserPO>> queryUserByName(@Valid @RequestBody QueryUserByNameRequest request) {
+        List<UserPO> allUser = userService.queryByName(request.getUserName());
         return BaseResp.success(allUser);
     }
 
     @ApiOperation("增加用户时存在异常")
     @RequestMapping(value = "/addWithExistException", method = RequestMethod.POST)
-    public BaseResp<User> addWithExistException(@Valid @RequestBody AddUserRequest request) {
-        User user = userService.addWithExistException(request.convertTo());
+    public BaseResp<UserPO> addWithExistException(@Valid @RequestBody AddUserRequest request) {
+        UserPO user = userService.addWithExistException(request.convertTo());
         return BaseResp.success(user);
     }
 
     @ApiOperation("增加用户时存在异常")
     @RequestMapping(value = "/addWithNameNotBlankException", method = RequestMethod.POST)
-    public BaseResp<User> addWithNameNotBlankException(@Valid @RequestBody AddUserRequest request) {
-        User user = userService.addWithNameNotBlankException(request.convertTo());
+    public BaseResp<UserPO> addWithNameNotBlankException(@Valid @RequestBody AddUserRequest request) {
+        UserPO user = userService.addWithNameNotBlankException(request.convertTo());
         return BaseResp.success(user);
     }
 
@@ -78,7 +78,7 @@ public class UserController extends BaseController {
     @ApiOperation("最大用户Id")
     @RequestMapping(value = "/maxUserId", method = RequestMethod.GET)
     public BaseResp maxUserId() {
-        Integer maxUserId = userService.maxUserId();
+        Long maxUserId = userService.maxUserId();
         return BaseResp.success(maxUserId);
     }
 

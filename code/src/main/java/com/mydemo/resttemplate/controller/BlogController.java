@@ -1,6 +1,6 @@
 package com.mydemo.resttemplate.controller;
 
-import com.mydemo.resttemplate.model.entity.User;
+import com.mydemo.resttemplate.dal.entity.UserPO;
 import com.mydemo.resttemplate.model.request.AddUserRequest;
 import com.mydemo.resttemplate.model.vo.UserVO;
 import com.mydemo.resttemplate.service.UserService;
@@ -26,9 +26,9 @@ public class BlogController extends BaseController {
 
     @ApiOperation("获取管理员信息，需要[admin:info]权限才能访问")
     @PostMapping(value = "/add")
-    public Integer addBlog(@Valid @RequestBody AddUserRequest request) {
+    public Long addBlog(@Valid @RequestBody AddUserRequest request) {
         UserVO userVO = request.convertTo();
-        User newUser = userService.addUser(userVO);
+        UserPO newUser = userService.addUser(userVO);
         return newUser.getId();
     }
 }

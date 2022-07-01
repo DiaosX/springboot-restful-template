@@ -1,6 +1,6 @@
 package com.mydemo.resttemplate.controller;
 
-import com.mydemo.resttemplate.model.entity.User;
+import com.mydemo.resttemplate.dal.entity.UserPO;
 import com.mydemo.resttemplate.model.request.AddUserRequest;
 import com.mydemo.resttemplate.model.vo.UserVO;
 import com.mydemo.resttemplate.service.UserService;
@@ -19,9 +19,9 @@ public class OrderController extends BaseController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public Integer addUser(@RequestBody AddUserRequest request) {
+    public Long addUser(@RequestBody AddUserRequest request) {
         UserVO userVO = request.convertTo();
-        User newUser = userService.addUser(userVO);
+        UserPO newUser = userService.addUser(userVO);
         return newUser.getId();
     }
 }

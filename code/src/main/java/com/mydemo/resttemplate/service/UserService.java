@@ -1,7 +1,7 @@
 package com.mydemo.resttemplate.service;
 
 import com.mydemo.resttemplate.common.base.BasePagedResult;
-import com.mydemo.resttemplate.model.entity.User;
+import com.mydemo.resttemplate.dal.entity.UserPO;
 import com.mydemo.resttemplate.model.request.SearchUserByConditionRequest;
 import com.mydemo.resttemplate.model.vo.UserVO;
 
@@ -9,15 +9,15 @@ import java.util.List;
 
 public interface UserService {
 
-    User addUser(UserVO user);
+    UserPO addUser(UserVO user);
 
-    List<User> queryAll();
+    List<UserPO> queryAll();
 
-    List<User> queryByName(String name);
+    List<UserPO> queryByName(String name);
 
-    User addWithExistException(UserVO user);
+    UserPO addWithExistException(UserVO user);
 
-    User addWithNameNotBlankException(UserVO user);
+    UserPO addWithNameNotBlankException(UserVO user);
 
     void deleteById(Integer id);
 
@@ -25,7 +25,7 @@ public interface UserService {
 
     Integer count();
 
-    Integer maxUserId();
+    Long maxUserId();
 
     BasePagedResult search(SearchUserByConditionRequest request);
 }
