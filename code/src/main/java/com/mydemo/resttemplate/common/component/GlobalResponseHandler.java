@@ -1,10 +1,10 @@
-package com.mydemo.resttemplate.common.aop;
-
+package com.mydemo.resttemplate.common.component;
 
 import com.alibaba.fastjson.JSON;
 import com.mydemo.resttemplate.common.annotation.IgnoreResultWrapper;
 import com.mydemo.resttemplate.common.base.BaseResp;
 import com.mydemo.resttemplate.controller.BaseController;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -16,10 +16,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import java.lang.reflect.Method;
 
 /**
- * 包装返回类型不是ApiResponseT<T>的方法
+ * @Author yst
+ * @Description 全局结果包装处理器，将接口返回封装为统一的响应结构
+ * @Date 2022/7/2 21:31
+ * @Version 1.0
  */
+@Slf4j
 @RestControllerAdvice
-public class ApiResponseBodyWrapper implements ResponseBodyAdvice<Object> {
+public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter returnType,
@@ -50,10 +54,12 @@ public class ApiResponseBodyWrapper implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(Object body,
                                   MethodParameter returnType,
-                                  MediaType selectedContentType,
-                                  Class<? extends HttpMessageConverter<?>> selectedConverterType,
-                                  ServerHttpRequest request,
-                                  ServerHttpResponse response) {
+                                  MediaType mediaType,
+                                  Class<? extends HttpMessageConverter<?>> aClass,
+                                  ServerHttpRequest serverHttpRequest,
+                                  ServerHttpResponse serverHttpResponse) {
+
+
         if (body == null) {
             return BaseResp.success();
         }

@@ -26,7 +26,7 @@ public class UserController extends BaseController {
     }
 
     @ApiOperation("增加用户")
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping(value = "/add")
     public BaseResp<UserPO> addUser(@Valid @RequestBody AddUserRequest request) {
         UserVO userVO = request.convertTo();
         UserPO newUser = userService.addUser(userVO);
@@ -34,63 +34,63 @@ public class UserController extends BaseController {
     }
 
     @ApiOperation("查询所有用户")
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    @GetMapping(value = "/listAll")
     public BaseResp<List<UserPO>> allUser() {
         List<UserPO> allUser = userService.queryAll();
         return BaseResp.success(allUser);
     }
 
     @ApiOperation("根据用户名查询用户")
-    @RequestMapping(value = "/queryByName", method = RequestMethod.POST)
+    @PostMapping(value = "/queryByName")
     public BaseResp<List<UserPO>> queryUserByName(@Valid @RequestBody QueryUserByNameRequest request) {
         List<UserPO> allUser = userService.queryByName(request.getUserName());
         return BaseResp.success(allUser);
     }
 
     @ApiOperation("增加用户时存在异常")
-    @RequestMapping(value = "/addWithExistException", method = RequestMethod.POST)
+    @PostMapping(value = "/addWithExistException")
     public BaseResp<UserPO> addWithExistException(@Valid @RequestBody AddUserRequest request) {
         UserPO user = userService.addWithExistException(request.convertTo());
         return BaseResp.success(user);
     }
 
     @ApiOperation("增加用户时存在异常")
-    @RequestMapping(value = "/addWithNameNotBlankException", method = RequestMethod.POST)
+    @PostMapping(value = "/addWithNameNotBlankException")
     public BaseResp<UserPO> addWithNameNotBlankException(@Valid @RequestBody AddUserRequest request) {
         UserPO user = userService.addWithNameNotBlankException(request.convertTo());
         return BaseResp.success(user);
     }
 
     @ApiOperation("删除用户时存在异常")
-    @RequestMapping(value = "/deleteById/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/deleteById/{id}")
     public BaseResp deleteById(@PathVariable("id") Integer id) {
         userService.deleteById(id);
         return BaseResp.success();
     }
 
     @ApiOperation("无异常删除用户")
-    @RequestMapping(value = "/deleteWithNotExistException/{id}", method = RequestMethod.POST)
+    @PostMapping(value = "/deleteWithNotExistException/{id}")
     public BaseResp deleteWithNotExistException(@PathVariable("id") Integer id) {
         userService.deleteWithNotExistException(id);
         return BaseResp.success();
     }
 
     @ApiOperation("最大用户Id")
-    @RequestMapping(value = "/maxUserId", method = RequestMethod.GET)
+    @GetMapping(value = "/maxUserId")
     public BaseResp maxUserId() {
         Long maxUserId = userService.maxUserId();
         return BaseResp.success(maxUserId);
     }
 
     @ApiOperation("获取所有用户个数")
-    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    @GetMapping(value = "/count")
     public BaseResp count() {
         Integer count = userService.count();
         return BaseResp.success(count);
     }
 
     @ApiOperation("检索用户")
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    @PostMapping(value = "/search")
     public BaseResp search(@Valid @RequestBody SearchUserByConditionRequest request) {
         return BaseResp.success(userService.search(request));
     }

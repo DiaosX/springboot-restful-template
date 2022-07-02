@@ -1,4 +1,4 @@
-package com.mydemo.resttemplate.common.runner;
+package com.mydemo.resttemplate.common.startup;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
