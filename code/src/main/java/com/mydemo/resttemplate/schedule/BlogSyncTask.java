@@ -15,11 +15,11 @@ import org.springframework.util.StopWatch;
 @Component
 public class BlogSyncTask {
 
-    @Scheduled(initialDelay = 60 * 100, fixedDelay = 60 * 1000)
+    @Scheduled(initialDelay = 60 * 100, fixedDelay = 2 * 1000)
     public void execute() {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start("BlogSyncTask");
-        log.info("BlogSyncTask:任务开始........");
+        log.info("BlogSyncTask:任务开始,ThreadId={}........", Thread.currentThread().getId());
         try {
             doExecute();
         } catch (Exception e) {
@@ -30,7 +30,9 @@ public class BlogSyncTask {
         log.info(stopWatch.prettyPrint());
     }
 
-    private void doExecute() {
-        log.info("do something...");
+    private void doExecute() throws InterruptedException {
+        log.info("do something...start");
+        Thread.sleep(10 * 1000);
+        log.info("do something...end");
     }
 }
